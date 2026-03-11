@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Shield, FileText, Info, Mail, Phone, MapPin, Instagram, Facebook, Youtube, Video } from 'lucide-react';
 
-type Section = 'home' | 'terms' | 'privacy' | 'impressum';
+type Section = 'home' | 'terms' | 'privacy' | 'deletion' | 'impressum';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState<Section>('home');
@@ -16,6 +16,7 @@ export default function App() {
     { id: 'home', label: 'Home', icon: Video },
     { id: 'terms', label: 'Terms of Use', icon: FileText },
     { id: 'privacy', label: 'Privacy', icon: Shield },
+    { id: 'deletion', label: 'Data Deletion', icon: Shield },
     { id: 'impressum', label: 'Impressum', icon: Info },
   ];
 
@@ -163,6 +164,36 @@ export default function App() {
             </motion.div>
           )}
 
+          {activeSection === 'deletion' && (
+            <motion.div
+              key="deletion"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className="prose prose-slate max-w-none bg-white p-8 sm:p-12 rounded-3xl shadow-sm border border-slate-100"
+            >
+              <h2 className="text-3xl font-bold text-slate-900 mb-8">User Data Deletion Instructions</h2>
+              <div className="space-y-6 text-slate-600 leading-relaxed">
+                <section>
+                  <h3 className="text-xl font-semibold text-slate-800 mb-3">How to Request Data Deletion</h3>
+                  <p>At Blue Visuals, we respect your privacy and provide you with the ability to request the deletion of your personal data that we may have collected through our services or social media integrations.</p>
+                </section>
+                <section>
+                  <h3 className="text-xl font-semibold text-slate-800 mb-3">Steps to Delete Your Data</h3>
+                  <ol className="list-decimal pl-5 space-y-2">
+                    <li>Send an email to <span className="font-semibold text-blue-600">herr.rafai@gmail.com</span> with the subject line "Data Deletion Request".</li>
+                    <li>In the body of the email, please provide your name and the platform (e.g., Facebook, Instagram) you used to interact with our services.</li>
+                    <li>Once we receive your request, we will verify your identity and process the deletion within 30 days.</li>
+                  </ol>
+                </section>
+                <section>
+                  <h3 className="text-xl font-semibold text-slate-800 mb-3">Automated Deletion</h3>
+                  <p>If you have connected our app via Facebook or Instagram, you can also remove our app's access directly through your social media account settings under "Apps and Websites". This will automatically trigger a data deletion callback to our systems.</p>
+                </section>
+              </div>
+            </motion.div>
+          )}
+
           {activeSection === 'impressum' && (
             <motion.div
               key="impressum"
@@ -237,6 +268,7 @@ export default function App() {
           <div className="flex gap-6">
             <button onClick={() => setActiveSection('terms')} className="text-xs text-slate-400 hover:text-blue-600 transition-colors">Terms</button>
             <button onClick={() => setActiveSection('privacy')} className="text-xs text-slate-400 hover:text-blue-600 transition-colors">Privacy</button>
+            <button onClick={() => setActiveSection('deletion')} className="text-xs text-slate-400 hover:text-blue-600 transition-colors">Deletion</button>
             <button onClick={() => setActiveSection('impressum')} className="text-xs text-slate-400 hover:text-blue-600 transition-colors">Impressum</button>
           </div>
         </div>
